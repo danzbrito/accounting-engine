@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CoaService } from './coa.service';
 import { CreateCoaDto } from './dto/create-coa.dto';
 import { UpdateCoaDto } from './dto/update-coa.dto';
@@ -13,6 +13,7 @@ export class CoaController {
     private readonly logger: LoggerService,
   ) { }
 
+  @UseGuards()
   @Post('create')
   create(@Body() createCoaDto: CreateCoaDto) {
     const check = this.transactionboxesService.find(createCoaDto.accountID);
